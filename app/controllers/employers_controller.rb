@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EmployersController < ApplicationController
   before_action :set_employer, only: %i[show update destroy]
 
