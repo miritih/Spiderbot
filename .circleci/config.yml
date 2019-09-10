@@ -8,8 +8,8 @@ default: &defaults
         CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
     - image: postgres:9.5
       environment:
-        POSTGRES_USER: ${POSTGRES_USER}
-        POSTGRES_DB: ${POSTGRES_DB}
+        POSTGRES_USER: spiderbot
+        POSTGRES_DB: spiderbot_test
         POSTGRES_PASSWORD: ""
 
   working_directory: ~/spiderbot/spiderbot
