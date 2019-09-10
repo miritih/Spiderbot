@@ -1,19 +1,15 @@
 class EmployersController < ApplicationController
   before_action :set_employer, only: [:show, :update, :destroy]
 
-  # GET /employers
   def index
     @employers = Employer.all
-
     render json: @employers
   end
 
-  # GET /employers/1
   def show
     render json: @employer
   end
 
-  # POST /employers
   def create
     @employer = Employer.new(employer_params)
 
@@ -24,7 +20,6 @@ class EmployersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /employers/1
   def update
     if @employer.update(employer_params)
       render json: @employer
@@ -33,19 +28,16 @@ class EmployersController < ApplicationController
     end
   end
 
-  # DELETE /employers/1
   def destroy
     @employer.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_employer
       @employer = Employer.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def employer_params
-      params.require(:employer).permit(:name, :location, :type, :sector)
+      params.require(:employer).permit(:name, :location, :employer_type, :sector)
     end
 end
