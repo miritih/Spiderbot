@@ -21,7 +21,7 @@ require 'action_cable/engine'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module CareerSpiderbot
+module Spiderbot
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
@@ -35,5 +35,9 @@ module CareerSpiderbot
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.generators do |g|
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
+    end
   end
 end
