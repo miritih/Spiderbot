@@ -10,31 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_062708) do
-
+ActiveRecord::Schema.define(version: 20_190_910_062_708) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "employers", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "location", null: false
-    t.string "employer_type"
-    t.string "sector"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'employers', force: :cascade do |t|
+    t.string 'name', null: false
+    t.string 'location', null: false
+    t.string 'employer_type'
+    t.string 'sector'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "import_configs", force: :cascade do |t|
-    t.string "job_title", null: false
-    t.string "location"
-    t.string "description", null: false
-    t.string "job_type"
-    t.string "job_link", null: false
-    t.string "department"
-    t.string "apply_link"
-    t.string "email"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'import_configs', force: :cascade do |t|
+    t.string 'job_title', null: false
+    t.string 'location'
+    t.string 'description', null: false
+    t.string 'job_type'
+    t.string 'job_link', null: false
+    t.string 'department'
+    t.string 'apply_link'
+    t.string 'email'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
-
 end

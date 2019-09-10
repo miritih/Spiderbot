@@ -1,5 +1,5 @@
 class ImportConfigsController < ApplicationController
-  before_action :set_import_config, only: [:show, :update, :destroy]
+  before_action :set_import_config, only: %i[show update destroy]
 
   # GET /import_configs
   def index
@@ -39,13 +39,14 @@ class ImportConfigsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_import_config
-      @import_config = ImportConfig.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def import_config_params
-      params.require(:import_config).permit(:job_title, :location)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_import_config
+    @import_config = ImportConfig.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def import_config_params
+    params.require(:import_config).permit(:job_title, :location)
+  end
 end
