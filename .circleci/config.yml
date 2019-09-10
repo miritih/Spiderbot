@@ -1,0 +1,91 @@
+default: &defaults
+  docker:
+    - image: circleci/ruby:2.6.0-node
+      environment:
+        PGHOST: localhost
+        PGUSER: spiderbot
+        RAILS_ENV: test
+        CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
+    - image: postgres:9.5
+      environment:
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_DB: ${POSTGRES_DB}
+        POSTGRES_PASSWORD: ""
+
+  working_directory: ~/spiderbot/spiderbot
+
+# Restore Cached Dependencies
+cmd_restore_cache: &cmd_restore_cache
+  restore_cache:
+      keys:
+      - spiderbot/spiderbot-{{ checksum "Gemfile.lock" }}
+      - spiderbot/spiderbot-
+
+# Bundle install dependencies
+cmd_install_dependencies: &cmd_install_dependencies
+  run:
+    name: Install dependencies
+    command: |
+      echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+      source $BASH_ENV
+      gem install bundler
+      bundle install --path vendor/bundle
+# Cache Dependencies
+cmd_save_cache: &cmd_save_cache
+  save_cache:
+    key: spiderbot/spiderbot-{{ checksum "Gemfile.lock" }}
+    paths:
+      - vendor/bundle
+
+# Wait for DB
+cmd_wait_for_postgres: &cmd_wait_for_postgres
+  run:
+    name: Waiting for Postgres to be ready
+    command: |
+      dockerize -wait tcp://localhost:5432 -timeout 1m
+cmd_attach_workspace: &cmd_attach_workspace
+  attach_workspace:
+    at: ~/spiderbot/spiderbot
+
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - *cmd_restore_cache
+      - *cmd_install_dependencies
+      - *cmd_save_cache
+      - *cmd_wait_for_postgres
+      - run:
+          name: Database setup
+          command: |
+             bundle exec rake db:create db:schema:load --trace
+             bundle exec rake db:migrate
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - *cmd_restore_cache
+      - *cmd_install_dependencies
+      - *cmd_save_cache
+      - *cmd_wait_for_postgres
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
+          name: Run tests
+          command: |
+            ./cc-test-reporter before-build
+            bundle exec rspec
+            ./cc-test-reporter after-build --exit-code $?
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
