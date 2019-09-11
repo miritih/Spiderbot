@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe "Employers", type: :request do
   describe "Employer requests" do
     let!(:employer) { create :employer }
