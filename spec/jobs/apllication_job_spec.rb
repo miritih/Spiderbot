@@ -1,4 +1,4 @@
-RSpec.describe ApplicationJob, :type => :job do
+RSpec.describe ApplicationJob, type: :job do
   describe "#application job" do
     it "sets queue adapter" do
       ActiveJob::Base.queue_adapter = :test
