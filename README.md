@@ -1,6 +1,7 @@
-[![CircleCI](https://circleci.com/gh/miritih/Spiderbot.svg?style=svg)](https://circleci.com/gh/miritih/Spiderbot)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/4ca8158c9fe84d299cf3/test_coverage)](https://codeclimate.com/github/miritih/Spiderbot/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/4ca8158c9fe84d299cf3/maintainability)](https://codeclimate.com/github/miritih/Spiderbot/maintainability)
+[![CircleCI](https://circleci.com/gh/miritih/Spiderbot.svg?style=svg&circle-token=6ada86b90bba9a2d1cf6d6aa7cf2ba22e4e5e3c6)](https://circleci.com/gh/miritih/Spiderbot)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/07f97edfbdf1477792ce337f082c440b)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=miritih/Spiderbot&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/07f97edfbdf1477792ce337f082c440b)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=miritih/Spiderbot&utm_campaign=Badge_Coverage)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
