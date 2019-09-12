@@ -1,0 +1,18 @@
+en:
+  errors:
+    unprocessable_entity:
+      status: "422"
+      title: "Request could not be processed"
+      detail: "One or more values failed to validate"
+    not_found:
+      status: "404"
+      title: "Not found"
+      detail: "The reference resource could not be found"
+    bad_request:
+      status: "400"
+      title: "Bad request"
+      detail: "Incorrect request syntax"
+    conflict:
+      status: "409"
+      title: "Conflict"
+      detail: "Failed to validate because of a conflict"

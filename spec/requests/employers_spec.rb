@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe "Employers", type: :request do
   describe "Employer requests" do
     let!(:employer) { create :employer }
@@ -68,8 +66,9 @@ RSpec.describe "Employers", type: :request do
         end
 
         it "returns doesn't allow balnk name/location" do
-          expect(json_response[:name]).to eq ["Name can't be blank"]
-          expect(json_response[:location]).to eq ["Location can't be blank"]
+          expect(json_response[:errors][:name]).to eq ["Name can't be blank"]
+          expect(json_response[:errors][:location]).
+            to eq ["Location can't be blank"]
         end
       end
     end
@@ -87,8 +86,9 @@ RSpec.describe "Employers", type: :request do
         it "returns errors" do
           put employer_path employer, params: invalid_params
           expect(response).to have_http_status(422)
-          expect(json_response[:name]).to eq ["Name can't be blank"]
-          expect(json_response[:location]).to eq ["Location can't be blank"]
+          expect(json_response[:errors][:name]).to eq ["Name can't be blank"]
+          expect(json_response[:errors][:location]).
+            to eq ["Location can't be blank"]
         end
       end
     end
