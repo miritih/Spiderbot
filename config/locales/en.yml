@@ -1,5 +1,29 @@
 en:
-  validation:
-    presence: "%{attribute} can't be blank"
-    uniqueness: "%{attribute} already exists"
+  errors:
+    application:
+      not_found:
+        status: "404"
+        title: "Not found"
+        detail: "The reference resource could not be found"
+        error_message: "We could not find the resource you requested. Please refer to the documentation"
+      unauthorized:
+        status: "401"
+        title: "Unauthorized"
+        detail: "Authentication failed"
+        error_message: "Please ensure that the token you provided is valid"
+      forbidden:
+        status: "403"
+        title: "Forbidden"
+        detail: "You are not authorized to invoke the operation"
+        error_message: "You don't have enough permission to perform requested operation, if this is a mistake kindly contact your system administrator"
+      internal_server_error:
+        status: "500"
+        title: "Internal server error"
+        detail: "The server was unable to complete your request"
+        error_message: "The application is currently down. The team is looking into it"
+      bad_request:
+        status: "400"
+        title: "Bad request"
+        detail: "Incorrect request syntax"
+        error_message: "You have entered the request in the wrong format. Please refer to the documentation"
 

@@ -1,0 +1,4 @@
+en:
+  validation:
+    presence: "%{attribute} can't be blank"
+    uniqueness: "%{attribute} already exists"
