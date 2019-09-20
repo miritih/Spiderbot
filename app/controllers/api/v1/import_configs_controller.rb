@@ -47,7 +47,7 @@ module Api
       def import_config_params
         params.require(:import_config).permit(
           :job_title, :location, :description, :job_type,
-          :job_link, :department, :apply_link, :email
+          :job_link, :department, :apply_link, :email, :start_url
         )
       end
     end

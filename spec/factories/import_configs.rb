@@ -6,6 +6,7 @@ FactoryBot.define do
     job_link { Faker::Internet.domain_name }
     department { Faker::Job.field }
     apply_link { Faker::Internet.domain_name }
+    start_url { Faker::Internet.domain_name }
     email { Faker::Internet.email }
   end
 end
