@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :jobs
   scope module: 'api/v1', path: 'api/v1' do
     resources :employers
     resources :import_configs
