@@ -12,7 +12,7 @@ RSpec.describe "ImportConfigs", type: :request do
           apply_link: Faker::Internet.domain_name,
           start_url: Faker::Internet.domain_name,
           email: Faker::Internet.email,
-          Company: Faker::Company.name
+          employer: Faker::Company.name
         }
       }
     end

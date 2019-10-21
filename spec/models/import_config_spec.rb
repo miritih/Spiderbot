@@ -8,6 +8,7 @@ RSpec.describe ImportConfig, type: :model do
     subject.description = Faker::Lorem.paragraphs
     subject.job_link =  Faker::Internet.domain_name
     subject.start_url = Faker::Internet.domain_name
+    subject.employer = Faker::Company.name
     expect(subject).to be_valid
   end
 

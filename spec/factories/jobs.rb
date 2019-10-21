@@ -8,5 +8,6 @@ FactoryBot.define do
     department { "MyString" }
     apply_link { "MyString" }
     apply_email { "MyString" }
+    
   end
 end
