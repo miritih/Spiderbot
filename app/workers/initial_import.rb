@@ -11,7 +11,9 @@ class InitialImport
     doc = Nokogiri::HTML(URI.parse(config.start_url).open)
     logger.info "first page crawling"
     employer = Employer.find_by(name: config.employer)
+    log_with_time("")do
 
+    end
     log_with_time("Crawled firt page details", scope: employer.name) do
       @titles = doc.xpath(config.job_title).map(&:content)
       @links = doc.xpath(config.job_link).map { |title| title[:href] }
@@ -78,9 +80,9 @@ class InitialImport
   def log_with_time(msg, options = {})
     ms = Benchmark.ms { yield }
     if options[:scope].present?
-      logger.info (options[:scope]) { "#{msg} (#{ms}ms)" }
+      logger.info (options[:scope]) { "#{msg} (#{ms.round(1)}ms)" }
     else
-      logger.info "#{msg} (#{ms}ms)"
+      logger.info "#{msg} (#{ms.round(1)}ms)"
     end
   end
 end

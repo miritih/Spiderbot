@@ -1,13 +1,15 @@
 FactoryBot.define do
   factory :import_config do
-    job_title { Faker::Job.title }
-    description { Faker::Lorem.paragraph }
-    job_type { Faker::Job.employment_type }
-    job_link { Faker::Internet.domain_name }
-    department { Faker::Job.field }
-    apply_link { Faker::Internet.domain_name }
-    start_url { Faker::Internet.domain_name }
-    email { Faker::Internet.email }
-    employer { Faker::Company.name }
+    job_title { "(//div[@class=\"opening\"]/a)[1]" }
+    location { "(//div[@class=\"opening\"]/span[@class=\"location\"])[1]" }
+    description { "//div[@id=\"content\"]" }
+    job_type { " " }
+    job_link { "(//div[@class=\"opening\"]/a)[1]" }
+    department { "preceding::h3[1]" }
+    apply_link { "(//div[@class=\"opening\"]/a)[1]" }
+    email { " " }
+    start_url { "https://boards.greenhouse.io/andela" }
+    employer {"Test Employer"}
+    base_url { "https://boards.greenhouse.io" }
   end
 end
