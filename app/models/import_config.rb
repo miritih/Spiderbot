@@ -1,4 +1,4 @@
 class ImportConfig < ApplicationRecord
-  validates :job_title, :description, :employer, :start_url, :job_link,
+  validates :first_page, :jobs_page_url, :home_page,
             presence: { message: I18n.t("validation.presence") }
 end
