@@ -29,7 +29,6 @@ RSpec.describe ImportConfig, type: :model do
     expect(subject).to_not be_valid
   end
 
-
   it "is not valid without job link" do
     subject.job_title = Faker::Job.title
     subject.description = Faker::Lorem.paragraphs

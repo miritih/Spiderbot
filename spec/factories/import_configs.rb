@@ -8,5 +8,6 @@ FactoryBot.define do
     apply_link { Faker::Internet.domain_name }
     start_url { Faker::Internet.domain_name }
     email { Faker::Internet.email }
+    employer { Faker::Company.name }
   end
 end
