@@ -11,8 +11,7 @@ class InitialImport
     doc = Nokogiri::HTML(URI.parse(config.start_url).open)
     logger.info "first page crawling"
     employer = Employer.find_by(name: config.employer)
-    log_with_time("")do
-
+    log_with_time("") do
     end
     log_with_time("Crawled firt page details", scope: employer.name) do
       @titles = doc.xpath(config.job_title).map(&:content)
@@ -29,7 +28,7 @@ class InitialImport
       titles: @titles,
       locations: @locations,
       type: @type,
-      departments: @departments
+      departments: @departments,
     )
   end
 
@@ -44,7 +43,7 @@ class InitialImport
   def match_with_title(config, doc)
     departments = {}
     doc.xpath(config.job_title).each_entry do |title|
-      ttl= title.children.text
+      ttl = title.children.text
       departments[ttl] = title.xpath(config.department).children.text
     end
     departments
@@ -53,8 +52,8 @@ class InitialImport
   def description_from_links(opt = {})
     logger.info "Clicks links to crawl jobs "
     opt[:links].each_with_index do |link, index|
-      log_with_time("Imported #{opt[:titles][index]}",
-        scope: opt[:employer].name) do
+      title = opt[:titles][index]
+      log_with_time("Imported #{title}", scope: opt[:employer].name) do
         desc = Nokogiri::HTML(
           URI.parse("#{opt[:config].base_url}#{link}").open,
         )
@@ -62,7 +61,7 @@ class InitialImport
 
         job_link = absolute_path(opt[:config].base_url, link)
         job = Job.find_or_create_by(
-          title: opt[:titles][index],
+          title: title,
           location: opt[:locations][index],
         )
         job.update(
@@ -71,7 +70,7 @@ class InitialImport
           apply_link: job_link,
           employer: opt[:employer],
           job_type: opt[:type],
-          department: opt[:departments][job.title]
+          department: opt[:departments][job.title],
         )
       end
     end

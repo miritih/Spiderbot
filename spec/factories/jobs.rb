@@ -9,6 +9,5 @@ FactoryBot.define do
     apply_link { "MyString" }
     apply_email { "MyString" }
     association :employer, factory: :employer
-
   end
 end

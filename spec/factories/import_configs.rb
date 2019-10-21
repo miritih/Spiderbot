@@ -9,7 +9,7 @@ FactoryBot.define do
     apply_link { "(//div[@class=\"opening\"]/a)[1]" }
     email { " " }
     start_url { "https://boards.greenhouse.io/andela" }
-    employer {"Test Employer"}
+    employer { "Test Employer" }
     base_url { "https://boards.greenhouse.io" }
   end
 end

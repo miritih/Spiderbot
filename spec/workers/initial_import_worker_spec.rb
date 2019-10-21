@@ -3,12 +3,14 @@ Sidekiq::Testing.fake!
 
 RSpec.describe InitialImport, type: :worker do
   describe "Initial Import Worker" do
-    let!(:import_config){ create :import_config }
-    let!(:employer){ Employer.create(
-      name: "Test Employer",
-      location: "Nairobi Kenya",
-      employer_type:  Faker::Company.type
-    )}
+    let!(:import_config) { create :import_config }
+    let!(:employer) do
+      Employer.create(
+        name: "Test Employer",
+        location: "Nairobi Kenya",
+        employer_type: Faker::Company.type,
+      )
+    end
 
     before(:each) do
       Sidekiq::Worker.clear_all
@@ -29,7 +31,5 @@ RSpec.describe InitialImport, type: :worker do
       InitialImport.drain
       assert_equal 0, InitialImport.jobs.size
     end
-
-
   end
 end

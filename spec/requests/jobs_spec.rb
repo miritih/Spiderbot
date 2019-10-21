@@ -1,14 +1,13 @@
 require "rails_helper"
 
 RSpec.describe "Jobs", type: :request do
-
   describe "Jobs requests" do
-    let!(:job){create :job}
-    let!(:employer){create :employer}
+    let!(:job) { create :job }
+    let!(:employer) { create :employer }
     let(:valid_params) do
       {
         job: {
-          title:"MyString",
+          title: "MyString",
           location: "MyString",
           description: "MyText",
           job_type: "",
@@ -25,7 +24,7 @@ RSpec.describe "Jobs", type: :request do
       {
         job: {
           title: "",
-          location: "",
+          location: ""
         }
       }
     end
@@ -49,7 +48,7 @@ RSpec.describe "Jobs", type: :request do
       end
     end
 
-    describe "Get /imoport_cofig/:id" do
+    describe "Get /jobs/:id" do
       it "returns the requested import job" do
         get job_path job
         expect(response).to have_http_status(200)
@@ -68,7 +67,6 @@ RSpec.describe "Jobs", type: :request do
         end
 
         it "returns the created job" do
-
           expect(json_response[:title]).
             to eq valid_params[:job][:title]
         end
@@ -118,6 +116,5 @@ RSpec.describe "Jobs", type: :request do
         expect(response).to have_http_status 204
       end
     end
-
   end
 end
