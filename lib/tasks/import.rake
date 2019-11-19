@@ -1,8 +1,9 @@
 namespace :import do
   desc "initial jobs import"
   task initial: :environment do
-    config = ImportConfig.find(2)
-    crawler = WebBot.new(config)
+    config = ImportConfig.find(5)
+    # crawler = WebBot.new(config)
+    InitialImport.perform_async(config.id)
   end
 
   desc "TODO"
