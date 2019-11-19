@@ -50,13 +50,12 @@ module Api
       # Only allow a trusted parameter "white list" through.
       def job_params
         params.require(:job).
-                          permit(:job_title, :job_location,:job_listing_url,
+          permit(:job_title, :job_location, :job_listing_url,
                               :id_from_source, :job_city, :job_category,
                               :job_employer, :job_type, :job_compensation,
-                              :job_description,:apply_to_email, :expire_date,
+                              :job_description, :apply_to_email, :expire_date,
                               :job_source_ad_target, :job_state, :job_country,
-                              :job_date, :postal_code
-                          )
+                              :job_date, :postal_code)
       end
     end
   end

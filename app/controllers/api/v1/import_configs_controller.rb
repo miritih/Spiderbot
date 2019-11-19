@@ -48,7 +48,7 @@ module Api
         params.require(:import_config).permit(:employer_override, :job_count,
                                               :jobs_page_url, :home_page,
                                               :location_override, :config_name,
-                                              seed_click: {},first_page: {},
+                                              seed_click: {}, first_page: {},
                                               second_page: {}, next_page: {})
       end
     end

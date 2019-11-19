@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_22_181238) do
+ActiveRecord::Schema.define(version: 2019_10_29_135900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2019_10_22_181238) do
     t.string "home_page"
     t.string "employer_override", default: "null"
     t.string "location_override", default: "null"
+    t.string "config_name"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -58,7 +59,6 @@ ActiveRecord::Schema.define(version: 2019_10_22_181238) do
     t.string "job_date"
     t.string "postal_code"
     t.string "job_title"
-
   end
 
 end
