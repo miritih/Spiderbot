@@ -14,7 +14,7 @@ module WebCrawler
       logger.info "Preparing to start scraping jobs"
       if config.seed_click.empty?
         first_page_crawl(@doc, config)
-        config.second_page.empty? ? @first_page : second_page_crawl(@doc, config)
+        config.second_page.empty? ? @first_page : desc_page_crawl(@doc, config)
         persist_jobs(config)
       else
         seed_click(config)
@@ -73,6 +73,7 @@ module WebCrawler
       logger.info "Crawling page ##{@page}"
       config.first_page.each do |key, value|
         next if value.empty?
+
         if @first_page.key?(key)
           @first_page[key] += doc.xpath(value).to_a
         else
@@ -90,12 +91,13 @@ module WebCrawler
       lnk = doc.xpath(config.next_page["nextPageXpath"])
       link = get_field_attr(lnk, :href)[0]
       return if link.nil? || @page == 100
+
       full_url = get_full_url(link, @home_page)
       logger.info "Opening next page"
       @doc = Nokogiri::HTML(URI.parse(full_url).open)
     end
 
-    def second_page_crawl(_doc, config)
+    def desc_page_crawl(_doc, config)
       logger.info "Crawling job descriptions"
       links = get_field_attr(@first_page["JOB_LISTING_URL"], :href)
       links.each_with_index do |link, index|
@@ -107,6 +109,7 @@ module WebCrawler
         @first_page.keys.each { |k| job[k.downcase] = @first_page[k][index] }
         config.second_page.each do |key, value|
           next if value.empty?
+
           job[key.downcase] = @desc.xpath(value)
         end
         @jobs[index] = job
