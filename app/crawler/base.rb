@@ -48,4 +48,3 @@ class Base
     Employer.find_by(name: name)
   end
 end
-

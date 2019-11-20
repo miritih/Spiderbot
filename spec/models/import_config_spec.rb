@@ -5,7 +5,7 @@ RSpec.describe ImportConfig, type: :model do
 
   it "is valid with valid attributes" do
     subject.first_page = Faker::Lorem.paragraphs
-    subject.jobs_page_url =  Faker::Internet.domain_name
+    subject.jobs_page_url = Faker::Internet.domain_name
     subject.home_page = Faker::Internet.domain_name
     subject.config_name = Faker::Company.name
     expect(subject).to be_valid
@@ -16,7 +16,7 @@ RSpec.describe ImportConfig, type: :model do
   end
 
   it "should have a valid first page" do
-    subject.jobs_page_url =  Faker::Internet.domain_name
+    subject.jobs_page_url = Faker::Internet.domain_name
     subject.home_page = Faker::Internet.domain_name
     subject.config_name = Faker::Company.name
     expect(subject).to_not be_valid
@@ -31,7 +31,7 @@ RSpec.describe ImportConfig, type: :model do
 
   it "is not valid without config name" do
     subject.first_page = Faker::Lorem.paragraphs
-    subject.jobs_page_url =  Faker::Internet.domain_name
+    subject.jobs_page_url = Faker::Internet.domain_name
     subject.home_page = Faker::Internet.domain_name
     expect(subject).to_not be_valid
   end

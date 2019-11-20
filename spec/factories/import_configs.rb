@@ -6,7 +6,7 @@ FactoryBot.define do
     location_override { "" }
     config_name { "Test Config" }
     job_count { 5 }
-    seed_click {{}}
+    seed_click { {} }
     first_page do
       {
         "JOB_TITLE": "(//div[@class=\"opening\"]/a)[1]",
@@ -20,6 +20,6 @@ FactoryBot.define do
         "JOB_DESCRIPTION": "//div[@id=\"content\"]"
       }
     end
-    next_page {{}}
+    next_page { {} }
   end
 end
