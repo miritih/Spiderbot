@@ -1,13 +1,21 @@
 FactoryBot.define do
   factory :job do
-    title { "MyString" }
-    location { "MyString" }
-    description { "MyText" }
+    job_title { "MyString" }
+    job_location { "MyString" }
     job_type { "" }
-    link { "MyString" }
-    department { "MyString" }
-    apply_link { "MyString" }
-    apply_email { "MyString" }
-    association :employer, factory: :employer
+    id_from_source { "MyString" }
+    job_city {}
+    job_category { "MyString" }
+    job_compensation { "MyString" }
+    expire_date { "MyString" }
+    job_employer { "Test Employer" }
+    job_listing_url { "MyString" }
+    apply_to_email { "MyString" }
+    job_description { "MyString" }
+    job_source_ad_target { "MyString" }
+    job_state { "MyString" }
+    job_country { "MyString" }
+    job_date { "MyString" }
+    postal_code { "MyString" }
   end
 end

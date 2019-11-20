@@ -5,5 +5,5 @@ class Employer < ApplicationRecord
             presence: { message: I18n.t("validation.presence") }
   validates :name, uniqueness: { message: I18n.t("validation.uniqueness") }
   has_many :jobs, foreign_key: "job_employer",
-                  dependent: :destroy, inverse_of: :author
+                  dependent: :destroy, inverse_of: :employer
 end

@@ -6,6 +6,6 @@ class InitialImport
 
   def perform(config_id)
     config = ImportConfig.find(config_id)
-    WebCrawler::WebBot.new(config)
+    WebBot.new(config)
   end
 end

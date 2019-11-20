@@ -6,13 +6,12 @@ module Api
       # GET /jobs
       def index
         @jobs = Job.all
-
-        render json: @jobs
+        render_response(@jobs, :ok)
       end
 
       # GET /jobs/1
       def show
-        render json: @job
+        render_response(@job, :ok)
       end
 
       # POST /jobs
@@ -20,24 +19,25 @@ module Api
         @job = Job.new(job_params)
 
         if @job.save
-          render json: @job, status: :created, location: @job
+          render_response(@job, :created)
         else
-          render json: @job.errors, status: :unprocessable_entity
+          render_error_response(@job.errors, :unprocessable_entity)
         end
       end
 
       # PATCH/PUT /jobs/1
       def update
         if @job.update(job_params)
-          render json: @job
+          render_response(@job, :ok)
         else
-          render json: @job.errors, status: :unprocessable_entity
+          render_error_response(@job.errors, :unprocessable_entity)
         end
       end
 
       # DELETE /jobs/1
       def destroy
         @job.destroy
+        render_response({}, :no_content)
       end
 
       private

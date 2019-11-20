@@ -17,7 +17,7 @@ module Api
         if @employer.save
           render_response(@employer, :created)
         else
-          render_error_response(@employer.errors, :unprocessable_entity)
+          render_error_response @employer.errors
         end
       end
 
@@ -25,12 +25,13 @@ module Api
         if @employer.update(employer_params)
           render_response(@employer)
         else
-          render_error_response(@employer.errors, :unprocessable_entity)
+          render_error_response @employer.errors
         end
       end
 
       def destroy
         @employer.destroy
+        render_response({}, :no_content)
       end
 
       private
