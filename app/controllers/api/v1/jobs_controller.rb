@@ -6,13 +6,12 @@ module Api
       # GET /jobs
       def index
         @jobs = Job.all
-
-        render json: @jobs
+        render_response(@jobs, :ok)
       end
 
       # GET /jobs/1
       def show
-        render json: @job
+        render_response(@job, :ok)
       end
 
       # POST /jobs
@@ -20,24 +19,25 @@ module Api
         @job = Job.new(job_params)
 
         if @job.save
-          render json: @job, status: :created, location: @job
+          render_response(@job, :created)
         else
-          render json: @job.errors, status: :unprocessable_entity
+          render_error_response @job.errors
         end
       end
 
       # PATCH/PUT /jobs/1
       def update
         if @job.update(job_params)
-          render json: @job
+          render_response(@job, :ok)
         else
-          render json: @job.errors, status: :unprocessable_entity
+          render_error_response @job.errors
         end
       end
 
       # DELETE /jobs/1
       def destroy
         @job.destroy
+        render_response({}, :no_content)
       end
 
       private
@@ -49,9 +49,15 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def job_params
-        params.require(:job).permit(:title, :location, :description, :job_type,
-                                    :link, :department, :apply_link,
-                                    :apply_email, :employer_id)
+        params.require(:job).
+          permit(
+            :job_title, :job_location, :job_listing_url,
+            :id_from_source, :job_city, :job_category,
+            :job_employer, :job_type, :job_compensation,
+            :job_description, :apply_to_email, :expire_date,
+            :job_source_ad_target, :job_state, :job_country,
+            :job_date, :postal_code
+          )
       end
     end
   end

@@ -96,6 +96,7 @@ RSpec.describe "Employers", type: :request do
     describe "DELETE /employer" do
       it "deletes employer sucessfully" do
         delete employer_path employer
+
         expect(response).to have_http_status 204
       end
     end

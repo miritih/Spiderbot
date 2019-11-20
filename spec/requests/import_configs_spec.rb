@@ -4,15 +4,21 @@ RSpec.describe "ImportConfigs", type: :request do
     let(:valid_params) do
       {
         import_config: {
-          job_title: Faker::Job.title,
-          description: Faker::Lorem.paragraph,
-          job_link: Faker::Internet.domain_name,
-          job_type: Faker::Job.employment_type,
-          department: Faker::Job.field,
-          apply_link: Faker::Internet.domain_name,
-          start_url: Faker::Internet.domain_name,
-          email: Faker::Internet.email,
-          employer: Faker::Company.name
+          jobs_page_url: Faker::Internet.domain_name,
+          home_page: Faker::Internet.domain_name,
+          employer_override: "Test Employer",
+          location_override: "",
+          config_name: "Test1 Config",
+          job_count: 5,
+          first_page: {
+            JOB_TITLE: "(//div[@class=\"opening\"]/a)[1]",
+            JOB_LOCATION: "(//div[@class=",
+            JOB_LISTING_URL: "(//div[@class=\"opening\"]/a)[1]",
+            ID_FROM_SOURCE: "(//div[@class=\"opening\"]/a)[1]"
+          },
+          second_page: {
+            JOB_DESCRIPTION: "//div[@id=\"content\"]"
+          }
         }
       }
     end
@@ -20,9 +26,9 @@ RSpec.describe "ImportConfigs", type: :request do
     let(:invalid_params) do
       {
         import_config: {
-          job_title: "",
+          config_name: "",
           description: "",
-          job_link: ""
+          jobs_page_url: ""
         }
       }
     end
@@ -30,9 +36,18 @@ RSpec.describe "ImportConfigs", type: :request do
     let(:update_params) do
       {
         import_config: {
-          job_title: Faker::Job.title,
-          description: Faker::Lorem.paragraph,
-          job_link: Faker::Internet.domain_name
+          jobs_page_url: Faker::Internet.domain_name,
+          home_page: Faker::Internet.domain_name,
+          config_name: "updated name",
+          first_page: {
+            JOB_TITLE: Faker::Job.title,
+            JOB_LOCATION: Faker::Job.title,
+            JOB_LISTING_URL: "//div",
+            ID_FROM_SOURCE: "//div"
+          },
+          second_page: {
+            JOB_DESCRIPTION: "//div"
+          }
         }
       }
     end
@@ -41,7 +56,8 @@ RSpec.describe "ImportConfigs", type: :request do
       it "returns all import configs" do
         get import_configs_path
         expect(response).to have_http_status(200)
-        expect(json_response.first[:job_title]).to eq import_config.job_title
+        title = json_response.first[:first_page][:JOB_TITLE]
+        expect(title).to eq import_config.first_page["JOB_TITLE"]
       end
     end
 
@@ -49,7 +65,8 @@ RSpec.describe "ImportConfigs", type: :request do
       it "returns the requested import config" do
         get import_config_path import_config
         expect(response).to have_http_status(200)
-        expect(json_response[:job_title]).to eq import_config.job_title
+        title = json_response[:first_page][:JOB_TITLE]
+        expect(title).to eq import_config.first_page["JOB_TITLE"]
       end
     end
 
@@ -64,8 +81,8 @@ RSpec.describe "ImportConfigs", type: :request do
         end
 
         it "returns the created config" do
-          expect(json_response[:job_title]).
-            to eq valid_params[:import_config][:job_title]
+          expect(json_response[:first_page][:JOB_TITLE]).
+            to eq valid_params[:import_config][:first_page][:JOB_TITLE]
         end
       end
 
@@ -79,30 +96,40 @@ RSpec.describe "ImportConfigs", type: :request do
         end
 
         it "returns errors" do
-          expect(json_response[:errors][:job_title]).
-            to eq ["Job title can't be blank"]
+          expect(json_response[:errors][:first_page]).
+            to eq ["First page can't be blank"]
+
+          expect(json_response[:errors][:jobs_page_url]).
+            to eq ["Jobs page url can't be blank"]
+
+          expect(json_response[:errors][:home_page]).
+            to eq ["Home page can't be blank"]
+
+          expect(json_response[:errors][:config_name]).
+            to eq ["Config name can't be blank"]
         end
       end
     end
 
     describe "PUT /import_config" do
-      context "when params are valid" do
-        it "updates import_configs" do
-          put import_config_path import_config, params: update_params
-          expect(response).to have_http_status(200)
-          expect(json_response[:job_title]).
-            to eq update_params[:import_config][:job_title]
-        end
-      end
-
       context "when params are invalid" do
         it "returns errors" do
           put import_config_path import_config, params: invalid_params
           expect(response).to have_http_status(422)
-          expect(json_response[:errors][:job_title]).
-            to eq ["Job title can't be blank"]
-          expect(json_response[:errors][:description]).
-            to eq ["Description can't be blank"]
+          expect(json_response[:errors][:jobs_page_url]).
+            to eq ["Jobs page url can't be blank"]
+
+          expect(json_response[:errors][:config_name]).
+            to eq ["Config name can't be blank"]
+        end
+      end
+
+      context "when params are valid" do
+        it "updates import_configs" do
+          put import_config_path import_config, params: update_params
+          expect(response).to have_http_status(200)
+          expect(json_response[:first_page][:JOB_TITLE]).
+            to eq update_params[:import_config][:first_page][:JOB_TITLE]
         end
       end
     end

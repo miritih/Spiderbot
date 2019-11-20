@@ -4,11 +4,10 @@ RSpec.describe ImportConfig, type: :model do
   subject { described_class.new }
 
   it "is valid with valid attributes" do
-    subject.job_title = Faker::Job.title
-    subject.description = Faker::Lorem.paragraphs
-    subject.job_link =  Faker::Internet.domain_name
-    subject.start_url = Faker::Internet.domain_name
-    subject.employer = Faker::Company.name
+    subject.first_page = Faker::Lorem.paragraphs
+    subject.jobs_page_url = Faker::Internet.domain_name
+    subject.home_page = Faker::Internet.domain_name
+    subject.config_name = Faker::Company.name
     expect(subject).to be_valid
   end
 
@@ -16,24 +15,24 @@ RSpec.describe ImportConfig, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it "should have a valid Start url" do
-    subject.job_title = Faker::Job.title
-    subject.description = Faker::Lorem.paragraphs
-    subject.job_link =  Faker::Internet.domain_name
+  it "should have a valid first page" do
+    subject.jobs_page_url = Faker::Internet.domain_name
+    subject.home_page = Faker::Internet.domain_name
+    subject.config_name = Faker::Company.name
     expect(subject).to_not be_valid
   end
 
-  it "is not valid without a description" do
-    subject.job_title = Faker::Job.title
-    subject.job_link =  Faker::Internet.domain_name
-    subject.start_url = Faker::Internet.domain_name
+  it "is not valid without jobs page url" do
+    subject.first_page = Faker::Lorem.paragraphs
+    subject.home_page = Faker::Internet.domain_name
+    subject.config_name = Faker::Company.name
     expect(subject).to_not be_valid
   end
 
-  it "is not valid without job link" do
-    subject.job_title = Faker::Job.title
-    subject.description = Faker::Lorem.paragraphs
-    subject.start_url = Faker::Internet.domain_name
+  it "is not valid without config name" do
+    subject.first_page = Faker::Lorem.paragraphs
+    subject.jobs_page_url = Faker::Internet.domain_name
+    subject.home_page = Faker::Internet.domain_name
     expect(subject).to_not be_valid
   end
 end

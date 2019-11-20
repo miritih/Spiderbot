@@ -3,7 +3,7 @@ RSpec.describe Job, type: :model do
   let!(:employer) { create :employer }
 
   it "is valid with valid attributes" do
-    subject.employer_id = employer.id
+    subject.job_employer = employer.name
   end
 
   it "is not valid without employer id" do

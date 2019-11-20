@@ -69,10 +69,12 @@ Style/ClassAndModuleChildren:
 Metrics/ClassLength:
   Description: 'Avoid classes longer than 100 lines of code.'
   Enabled: true
+  Max: 180
 
 Metrics/ModuleLength:
   Description: 'Avoid modules longer than 100 lines of code.'
   Enabled: true
+  Max: 180
 
 Style/ClassVars:
   Description: 'Avoid the use of class variables.'

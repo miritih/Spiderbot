@@ -7,15 +7,23 @@ RSpec.describe "Jobs", type: :request do
     let(:valid_params) do
       {
         job: {
-          title: "MyString",
-          location: "MyString",
-          description: "MyText",
+          job_title: "MyString",
+          job_location: "MyString",
           job_type: "",
-          link: "MyString",
-          department: "MyString",
-          apply_link: "MyString",
-          apply_email: "MyString",
-          employer_id: employer.id
+          id_from_source: "MyString",
+          job_city: "",
+          job_category: "MyString",
+          job_compensation: "MyString",
+          expire_date: "MyString",
+          job_employer: employer.name,
+          job_listing_url: "MyString",
+          apply_to_email: "MyString",
+          job_description: "MyString",
+          job_source_ad_target: "MyString",
+          job_state: "MyString",
+          job_country: "MyString",
+          job_date: "MyString",
+          postal_code: "MyString"
         }
       }
     end
@@ -23,8 +31,8 @@ RSpec.describe "Jobs", type: :request do
     let(:invalid_params) do
       {
         job: {
-          title: "",
-          location: ""
+          job_title: "",
+          job_location: ""
         }
       }
     end
@@ -32,10 +40,10 @@ RSpec.describe "Jobs", type: :request do
     let(:update_params) do
       {
         job: {
-          title: "Update MyString",
-          location: "Update MyString",
-          description: "Update MyText",
-          employer: employer
+          job_title: "Update MyString",
+          job_location: "Update MyString",
+          job_description: "Update MyText",
+          job_employer: "employer"
         }
       }
     end
@@ -44,7 +52,7 @@ RSpec.describe "Jobs", type: :request do
       it "returns all import jobs" do
         get jobs_path
         expect(response).to have_http_status(200)
-        expect(json_response.first[:title]).to eq job.title
+        expect(json_response.first[:job_title]).to eq job.job_title
       end
     end
 
@@ -52,7 +60,7 @@ RSpec.describe "Jobs", type: :request do
       it "returns the requested import job" do
         get job_path job
         expect(response).to have_http_status(200)
-        expect(json_response[:title]).to eq job.title
+        expect(json_response[:job_title]).to eq job.job_title
       end
     end
 
@@ -67,8 +75,8 @@ RSpec.describe "Jobs", type: :request do
         end
 
         it "returns the created job" do
-          expect(json_response[:title]).
-            to eq valid_params[:job][:title]
+          expect(json_response[:job_title]).
+            to eq valid_params[:job][:job_title]
         end
       end
 
@@ -82,8 +90,8 @@ RSpec.describe "Jobs", type: :request do
         end
 
         it "returns errors" do
-          expect(json_response[:title]).
-            to eq ["Title can't be blank"]
+          expect(json_response[:errors][:job_title]).
+            to eq ["Job title can't be blank"]
         end
       end
     end
@@ -93,8 +101,8 @@ RSpec.describe "Jobs", type: :request do
         it "updates jobs" do
           put job_path job, params: update_params
           expect(response).to have_http_status(200)
-          expect(json_response[:title]).
-            to eq update_params[:job][:title]
+          expect(json_response[:job_title]).
+            to eq update_params[:job][:job_title]
         end
       end
 
@@ -102,10 +110,10 @@ RSpec.describe "Jobs", type: :request do
         it "returns errors" do
           put job_path job, params: invalid_params
           expect(response).to have_http_status(422)
-          expect(json_response[:title]).
-            to eq ["Title can't be blank"]
-          expect(json_response[:location]).
-            to eq ["Location can't be blank"]
+          expect(json_response[:errors][:job_title]).
+            to eq ["Job title can't be blank"]
+          expect(json_response[:errors][:job_location]).
+            to eq ["Job location can't be blank"]
         end
       end
     end
