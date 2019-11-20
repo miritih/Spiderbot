@@ -21,7 +21,7 @@ module Api
         if @job.save
           render_response(@job, :created)
         else
-          render_error_response(@job.errors, :unprocessable_entity)
+          render_error_response @job.errors
         end
       end
 
@@ -30,7 +30,7 @@ module Api
         if @job.update(job_params)
           render_response(@job, :ok)
         else
-          render_error_response(@job.errors, :unprocessable_entity)
+          render_error_response @job.errors
         end
       end
 

@@ -6,6 +6,6 @@ class InitialImport
 
   def perform(config_id)
     config = ImportConfig.find(config_id)
-    WebBot.new(config)
+    Spiders::WebBot.new(config)
   end
 end

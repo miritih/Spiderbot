@@ -1,12 +1,10 @@
-module Crawlers
+module Spiders
   class Base
     require "nokogiri"
     require "open-uri"
 
     def initialize
       @unlashed_employer = "TestEmployer"
-      logger.level = Logger::INFO
-      @imported_jobs = 0
     end
 
     def absolute_path(page_url, href)

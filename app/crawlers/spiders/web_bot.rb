@@ -1,5 +1,5 @@
-module Crawlers
-  class WebBot < Crawlers::Base ActiveRecord::Base
+module Spiders
+  class WebBot < Spiders::Base
     def initialize(config)
       start_crawling(config)
     end
@@ -12,14 +12,10 @@ module Crawlers
       @page = 1
       @home_page = config.home_page
       logger.info "Preparing to start scraping jobs"
-      if config.seed_click.empty?
-        first_page_crawl(@doc, config)
-        config.second_page.empty? ? @first_page : desc_page_crawl(@doc, config)
-        persist_jobs(config)
-      else
-        seed_click(config)
-        first_page_crawl(@doc, config)
-      end
+      seed_click(config) unless config.seed_click.empty?
+      first_page_crawl(@doc, config)
+      config.second_page.empty? ? @first_page : desc_page_crawl(@doc, config)
+      persist_jobs(config)
     end
 
     def persist_jobs(config)
