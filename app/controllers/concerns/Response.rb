@@ -21,19 +21,27 @@ module Response
 
   def meta_pagination(paginated_obj, options = {})
     options[:meta] = {} unless options.has_key?(:meta)
-    meta_options = options[:meta].merge(generate_pagination(paginated_obj))
+    meta_options = options[:meta].merge(generate_pagination)
     options[:meta] = meta_options
     options
   end
 
-  def generate_pagination(paginated_obj)
+  def generate_pagination
+    metadata =  pagy_metadata(@pagy)
     {
-      links: {
-        current_page: paginated_obj.current_page,
-        prev_page: paginated_obj.previous_page,
-        next_page: paginated_obj.next_page,
-        total_pages: paginated_obj.total_pages
-      }
+        current_page: metadata[:page],
+        prev_page: metadata[:prev],
+        next_page: metadata[:next],
+        page_count: metadata[:pages],
+        per_page: metadata[:items],
+        total_count: metadata[:count],
+        links: [{"scaffold_url": metadata[:scaffold_url]},
+                {"self": metadata[:page_url]},
+                {"first": metadata[:first_url]},
+                {"previous": metadata[:prev_url]},
+                {"next": metadata[:next_url]},
+                {"last": metadata[:last_url]}
+              ]
     }
   end
 

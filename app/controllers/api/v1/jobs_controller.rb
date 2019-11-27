@@ -5,8 +5,8 @@ module Api
 
       # GET /jobs
       def index
-        jobs = Job.paginate(page: params[:page])
-        render_response(serializer, jobs, status: :ok)
+        @pagy, jobs = pagy(Job.all)
+        render_response(serializer, jobs)
       end
 
       # GET /jobs/1
