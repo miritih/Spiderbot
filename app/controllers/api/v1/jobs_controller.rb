@@ -5,9 +5,8 @@ module Api
 
       # GET /jobs
       def index
-        jobs = Job.all
-        json_jobs = JobSerializer.new(jobs).serialized_json
-        render_response(json_jobs)
+        @pagy, jobs = pagy(Job.all)
+        render_response(serializer, jobs)
       end
 
       # GET /jobs/1
