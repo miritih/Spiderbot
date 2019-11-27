@@ -4,8 +4,9 @@ module Api
       before_action :set_employer, only: %i[show update destroy]
 
       def index
-        @pagy, employers = pagy(Employer.all)
-        render_response(serializer, employers)
+        employers = Employer.all
+        json_employers = EmployerSerializer.new(employers).serialized_json
+        render_response json_employers
       end
 
       def show
