@@ -27,6 +27,8 @@ gem 'devise'
 gem 'activeadmin'
 gem 'activeadmin_json_editor', '~> 0.0.7'
 
+# use fast_jsonapi as seralizer
+gem 'fast_jsonapi'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
