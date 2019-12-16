@@ -5,14 +5,13 @@ module Api
 
       # GET /jobs
       def index
-        jobs = Job.all
-        json_jobs = JobSerializer.new(jobs).serialized_json
-        render_response(json_jobs)
+        jobs = Job.paginate(page: params[:page])
+        render_response(serializer, jobs, status: :ok)
       end
 
       # GET /jobs/1
       def show
-        render_response(@job, :ok)
+        render_response(serializer, @job, status: :ok)
       end
 
       # POST /jobs
@@ -20,7 +19,7 @@ module Api
         @job = Job.new(job_params)
 
         if @job.save
-          render_response(@job, :created)
+          render_response(serializer, @job, status: :created)
         else
           render_error_response @job.errors
         end
@@ -29,7 +28,7 @@ module Api
       # PATCH/PUT /jobs/1
       def update
         if @job.update(job_params)
-          render_response(@job, :ok)
+          render_response(serializer, @job, status: :ok)
         else
           render_error_response @job.errors
         end
@@ -38,7 +37,9 @@ module Api
       # DELETE /jobs/1
       def destroy
         @job.destroy
-        render_response({}, :no_content)
+        render_response(serializer, {}) do
+          render json: "", status: :no_content
+        end
       end
 
       private
@@ -46,6 +47,10 @@ module Api
       # Use callbacks to share common setup or constraints between actions.
       def set_job
         @job = Job.find(params[:id])
+      end
+
+      def serializer
+        JobSerializer
       end
 
       # Only allow a trusted parameter "white list" through.
