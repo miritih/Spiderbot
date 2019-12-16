@@ -30,6 +30,9 @@ gem 'activeadmin_json_editor', '~> 0.0.7'
 # use fast_jsonapi as seralizer
 gem 'fast_jsonapi'
 
+# use will paginate for pagination
+gem 'will_paginate', '~> 3.1.0'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
