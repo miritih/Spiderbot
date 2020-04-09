@@ -9,7 +9,7 @@ default: &defaults
       environment:
         POSTGRES_USER: spiderbot
         POSTGRES_DB: spiderbot_test
-        POSTGRES_PASSWORD: ""
+        POSTGRES_PASSWORD: $DB_PASS
 
   working_directory: ~/spiderbot/spiderbot
 

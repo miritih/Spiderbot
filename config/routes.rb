@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   scope module: 'api/v1', path: 'api/v1' do
     resources :employers
     resources :import_configs
