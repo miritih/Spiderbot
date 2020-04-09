@@ -22,6 +22,12 @@ gem 'redis'
 # Use sidekiq for background job processing
 gem 'sidekiq'
 
+# ActiveAdmin
+gem 'devise'
+gem 'activeadmin'
+gem 'activeadmin_json_editor', '~> 0.0.7'
+
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
