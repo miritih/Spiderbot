@@ -4,8 +4,10 @@ describe "Response concern" do
   describe "Render response" do
     context "When block is passed" do
       it "renders resource as json" do
-        response = render_response(employer) do
+        response = render_response(EmployerSerializer, employer) do
           { employer: employer, status: :ok }
+          binding.pry
+
         end
         expect(response[:employer][:id]).to eq employer.id
       end

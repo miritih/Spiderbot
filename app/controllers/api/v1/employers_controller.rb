@@ -4,12 +4,12 @@ module Api
       before_action :set_employer, only: %i[show update destroy]
 
       def index
-        @employers = Employer.all
-        render_response @employers
+        @pagy, employers = pagy(Employer.all)
+        render_response(serializer, employers)
       end
 
       def show
-        render_response @employer
+        render_response(serializer, @employer)
       end
 
       def create
@@ -38,6 +38,10 @@ module Api
 
       def set_employer
         @employer = Employer.find(params[:id])
+      end
+
+      def serializer
+        EmployerSerializer
       end
 
       def employer_params

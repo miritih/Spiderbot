@@ -36,13 +36,14 @@ RSpec.describe "Employers", type: :request do
       it "gets all employers" do
         get employers_path
         expect(response).to have_http_status(200)
-        expect(json_response.first[:name]).to eq(employer.name)
+        expect(json_response[:data].first[:attributes][:name]).
+          to eq(employer.name)
       end
 
       it "gets single employer" do
         get employer_path employer
         expect(response).to have_http_status(200)
-        expect(json_response[:name]).to eq(employer.name)
+        expect(json_response[:data][:attributes][:name]).to eq(employer.name)
       end
     end
 

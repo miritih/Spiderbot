@@ -52,7 +52,8 @@ RSpec.describe "Jobs", type: :request do
       it "returns all import jobs" do
         get jobs_path
         expect(response).to have_http_status(200)
-        expect(json_response.first[:job_title]).to eq job.job_title
+        expect(json_response[:data].first[:attributes][:job_title]).
+          to eq job.job_title
       end
     end
 
