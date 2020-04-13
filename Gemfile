@@ -30,6 +30,9 @@ gem 'activeadmin_json_editor', '~> 0.0.7'
 # use pagy for pagination
 gem 'pagy'
 
+#use fast_jsonapi for serialization
+gem 'fast_jsonapi'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
