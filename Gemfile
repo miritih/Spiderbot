@@ -27,6 +27,8 @@ gem 'devise'
 gem 'activeadmin'
 gem 'activeadmin_json_editor', '~> 0.0.7'
 
+# use pagy for pagination
+gem 'pagy'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
