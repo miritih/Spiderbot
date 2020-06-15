@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.0'
+ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
@@ -27,6 +27,11 @@ gem 'devise'
 gem 'activeadmin'
 gem 'activeadmin_json_editor', '~> 0.0.7'
 
+# use pagy for pagination
+gem 'pagy'
+
+#use fast_jsonapi for serialization
+gem 'fast_jsonapi'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

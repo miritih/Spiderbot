@@ -1,6 +1,6 @@
 default: &defaults
   docker:
-    - image: circleci/ruby:2.6.0-node
+    - image: circleci/ruby:2.6.6-node
       environment:
         PGHOST: localhost
         PGUSER: spiderbot
