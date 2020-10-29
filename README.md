@@ -2,27 +2,61 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/07f97edfbdf1477792ce337f082c440b)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=miritih/Spiderbot&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/07f97edfbdf1477792ce337f082c440b)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=miritih/Spiderbot&utm_campaign=Badge_Coverage)
 
-# README
+**Spiderbot** Is a crawling tool that aggregates jobs from diffrent job sources. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Usage
 
-Things you may want to cover:
+It is recommended that you have the following set up on your local environment before getting started
 
-* Ruby version
+1. [Ruby ~> 2.6.6](https://www.ruby-lang.org/en/downloads/)
+2. [Ruby on Rails ~>  6.0.0](http://rubyonrails.org/)
+3. [Postgres](http://www.postgresql.org)
+4. [Git](https://git-scm.com)
 
-* System dependencies
+Clone the repository into your local environment
 
-* Configuration
+```bash
+$ git clone git@github.com:miritih/Spiderbot.git
+```
 
-* Database creation
+Run bundle to install all the gems
 
-* Database initialization
+```bash
+$ bundle install
+```
 
-* How to run the test suite
+Run the migrations
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+$ rails db:create db:migrate
+```
 
-* Deployment instructions
+If you wish to populate your database with [Faker gem](https://github.com/stympy/faker) run this;
 
-* ...
+```bash
+$ rake db:populate
+```
+
+## Tests
+
+```bash
+$ rspec spec
+```
+
+## Contributing
+
+Contributions are **welcome** and will be fully **credited**.
+
+## Security
+
+If you discover any security related issues, please create an issue in the repo.
+
+## Credits
+
+* [Eric Mwenda](https://github.com/miritih)
+
+## License
+
+### The MIT License (MIT)
+
+Licensed under the [Apache License 2.0](http://www.apache.org/licenses/).
